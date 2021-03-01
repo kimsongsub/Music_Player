@@ -1,13 +1,14 @@
 # Music Player
 
 ## Function
-
+Function Name | Description
 ---- | ----  
+
 **Play**    | Print current data  
 **Next**    | Move next music  
 **Back**    | Move back music  
 **Add Music**    | Add new music   
-**Delete Music**    | Delete current music
+**Delete Music**    | Delete current music  
 **Circular**    | If use the Next function with last music, move to first music
 
 
