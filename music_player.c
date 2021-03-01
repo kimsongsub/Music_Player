@@ -4,7 +4,8 @@
 
 typedef struct music 
 {
-	int data;
+	//int data; 
+	char musicName[15]; 
 	struct music *backMusic;
 	struct music *frontMusic;
 } Music;
@@ -13,7 +14,7 @@ void initMusic();
 void playMusic();
 void Next();
 void Back();
-void addMusic(int);
+void addMusic();
 void deleteMusic();
 void allFree();
 
@@ -23,7 +24,6 @@ Music *currentMusic;
 
 int main(void)
 {
-	int newdata;
 	int i;
 
 	initMusic();
@@ -37,7 +37,7 @@ int main(void)
 	for (;;)
 	{
 		printf("\n\n[Play] [Next] [Back] [Add] [Delete] [Exit]\n");
-		scanf("%s", command);
+		scanf("%s",command);
 
 		if(strcmp(command, "Exit") == 0)
 		{
@@ -61,9 +61,8 @@ int main(void)
 
 		else if(strcmp(command, "Add") == 0)
 		{
-			printf("input the song data\n");
-			scanf("%d", &newdata);
-			addMusic(newdata);
+			printf("Input the song name\n");
+			addMusic();
 		}
 
 		else if(strcmp(command, "Delete") == 0)
@@ -72,7 +71,7 @@ int main(void)
 		}
 
 		else
-			printf("!! Please note the uppercase and rewrite it !!\n");	
+			printf("\n!! Please note the uppercase and rewrite it !!\n");	
 	}
 
 	allFree();
@@ -82,7 +81,7 @@ int main(void)
 void initMusic()
 {
 	headerPointer = (Music *)malloc(sizeof(Music));
-	headerPointer -> data = 0x00;
+	//headerPointer -> musicName = "000";
 	headerPointer -> backMusic = headerPointer;
 	headerPointer -> frontMusic = headerPointer;
 }
@@ -98,7 +97,7 @@ void playMusic()
 		if(currentMusic == headerPointer)
 			currentMusic = headerPointer -> frontMusic;
 	
-		printf("The song is %d\n", currentMusic -> data);
+		printf("The song is [%s]\n", currentMusic -> musicName);
 	}
 }
 
@@ -116,7 +115,7 @@ void Next()
 		else
 			currentMusic = currentMusic -> frontMusic;
 
-		printf("Current Music is [%d]\n", currentMusic -> data);
+		printf("Current Music is [%s]\n", currentMusic -> musicName);
 	}
 }
 
@@ -135,18 +134,21 @@ void Back()
 		else
 			currentMusic = currentMusic -> backMusic;
 
-		printf("Current Music is [%d]\n", currentMusic -> data);
+		printf("Current Music is [%s]\n", currentMusic -> musicName);
 	}
 }
 
 
 
 
-void addMusic(int newdata)
+void addMusic()
 {
+	char newdata[15];
+	scanf("%s", newdata);
 	Music *newMusic;
 	newMusic = (Music *)malloc(sizeof(Music));
-	newMusic -> data = newdata;
+	//newMusic -> musicName = newdata;
+	strcpy(newMusic -> musicName, newdata);
 	headerPointer -> backMusic -> frontMusic = newMusic;
 	headerPointer -> backMusic -> frontMusic -> backMusic = headerPointer -> backMusic;
 	headerPointer -> backMusic = headerPointer -> backMusic -> frontMusic;
@@ -167,7 +169,7 @@ void deleteMusic()
 	{
 		Music *deletePointer;
 		deletePointer = currentMusic;
-		printf("[[%d]]\n", deletePointer -> data);
+		printf("[[%s]]\n", deletePointer -> musicName);
 		Next(headerPointer, currentMusic);
 		deletePointer -> backMusic -> frontMusic = deletePointer -> frontMusic;
 		deletePointer -> frontMusic -> backMusic = deletePointer -> backMusic;
@@ -183,7 +185,6 @@ void allFree()
 	Music *iter = headerPointer;
 	Music *iterNext = NULL;
 	do {
-		printf("Music [%d] was deleted.\n", iter -> data);
 		iterNext = iter -> frontMusic;
 		free(iter);
 		iter = iterNext;
