@@ -4,7 +4,6 @@
 
 typedef struct music 
 {
-	//int data; 
 	char musicName[15]; 
 	struct music *backMusic;
 	struct music *frontMusic;
@@ -81,7 +80,6 @@ int main(void)
 void initMusic()
 {
 	headerPointer = (Music *)malloc(sizeof(Music));
-	//headerPointer -> musicName = "000";
 	headerPointer -> backMusic = headerPointer;
 	headerPointer -> frontMusic = headerPointer;
 }
@@ -147,7 +145,6 @@ void addMusic()
 	scanf("%s", newdata);
 	Music *newMusic;
 	newMusic = (Music *)malloc(sizeof(Music));
-	//newMusic -> musicName = newdata;
 	strcpy(newMusic -> musicName, newdata);
 	headerPointer -> backMusic -> frontMusic = newMusic;
 	headerPointer -> backMusic -> frontMusic -> backMusic = headerPointer -> backMusic;
