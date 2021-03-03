@@ -112,8 +112,6 @@ void Next()
 			currentMusic = headerPointer -> frontMusic;
 		else
 			currentMusic = currentMusic -> frontMusic;
-
-		printf("Current Music is [%s]\n", currentMusic -> musicName);
 	}
 }
 
@@ -131,8 +129,6 @@ void Back()
 			currentMusic = headerPointer -> backMusic;
 		else
 			currentMusic = currentMusic -> backMusic;
-
-		printf("Current Music is [%s]\n", currentMusic -> musicName);
 	}
 }
 
@@ -166,13 +162,11 @@ void deleteMusic()
 	{
 		Music *deletePointer;
 		deletePointer = currentMusic;
-		printf("[[%s]]\n", deletePointer -> musicName);
+		printf("[[%s]] was deleted \n", deletePointer -> musicName);
 		Next(headerPointer, currentMusic);
 		deletePointer -> backMusic -> frontMusic = deletePointer -> frontMusic;
 		deletePointer -> frontMusic -> backMusic = deletePointer -> backMusic;
 		free(deletePointer);
-
-		printf("Delete Completed\n");
 	}
 }
 
