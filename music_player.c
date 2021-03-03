@@ -163,7 +163,7 @@ void deleteMusic()
 		Music *deletePointer;
 		deletePointer = currentMusic;
 		printf("[[%s]] was deleted \n", deletePointer -> musicName);
-		Next(headerPointer, currentMusic);
+		Next();
 		deletePointer -> backMusic -> frontMusic = deletePointer -> frontMusic;
 		deletePointer -> frontMusic -> backMusic = deletePointer -> backMusic;
 		free(deletePointer);
