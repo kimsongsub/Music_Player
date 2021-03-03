@@ -28,10 +28,6 @@ int main(void)
 	initMusic();
 	currentMusic = headerPointer;
 	char command[10];
-	for(i=0; i++; i<7)
-	{
-		command[i] = '\0';
-	}
 
 	for (;;)
 	{
